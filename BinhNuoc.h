@@ -37,7 +37,7 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 			int i,gtri;
 			makeNull_bottle(B); //lam rong binh nuoc cai da
 			for(i=0;i<mucnuoc;i++){
-				printf("Nhap muc nuoc[%d]: ",i); scanf("%d",&gtri);
+				printf("Nhap muc mau nuoc[%d]: ",i); scanf("%d",&gtri);
 				Add_AWaterLevel(B,gtri);
 			}
 		}
@@ -52,7 +52,7 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 	}
 	//Hien thi trang thai binh nuoc
 	void HienThiBinhNuoc(binhNuoc B){
-		printf("\nXem binh nuoc:");
+		printf("\nBinh nuoc:");
 		while(!empty_bottle(B)){
 			printf("\n|\t%s\t|",mau[MucNuocDau(B)]);
 			delete_AWaterLevel(&B);

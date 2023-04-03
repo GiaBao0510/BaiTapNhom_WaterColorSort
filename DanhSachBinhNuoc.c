@@ -12,7 +12,7 @@ node * MakeNodeNull(){
 }
 //2.Kiem tra danh sach lien ket rong
 int Empty(node *X){
-	return X == NULL;
+	return X== NULL;
 }
 //3.Gan gia tri cho mot nut
 node *AssignValue(binhNuoc data){
@@ -128,36 +128,111 @@ int EmptyBottlePositionQuery(node *X){
 }
 //10.Kiem tra binh nuoc X nao do co trong danh sach lien ket khong
 int IsTheJarXinTheLinkedList(binhNuoc X, node *LL){
-	
+	//Neu danh sach lien ket rong thi tra ve 0
+	if(Empty(LL)){
+		return 0;
+	}else{
+		//Cho Q tro den LL
+		node *Q = LL;
+		//Lap de tim tung binh nuoc trong danh sach lien ket co khong
+		for(Q;Q->next != NULL; Q= Q->next){
+			//Neu tim thay thi tra ve 1
+			if(CompareTwoBottles(X,Q->data)){
+				return 1;
+			}
+		}
+		return 0;//Khong tim thay
+	}
 }
 //11.So sanh hai cac binh nuoc trong hai danh sach co giong nhau khong
-
+int CompareTwoLinkedList(node *A,node *B){
+	//So sach do dai cua hai danh sach lien ket. NEu do dai cua hai danh sach khac nhau thi tra ve 0
+	if(size(A) != size(B)){
+		return 0;
+	}else{
+		//Cho nut X tro den A va cho nut Y tro den B
+		node *X = A,
+			 *Y = B;
+		//Lap so sanh tung binh nuoc trong hai danh sach
+		while(X->next != NULL && Y->next != NULL){
+			//Neu ma ket qua so sanh khac 1 thi tra ve 0
+			if(CompareTwoBottles(X->data, Y->data) != 1){
+				return 0;
+			}else{	//Nguoc lai thi tim hai binh khac de so sanh
+				X = X->next;
+				Y = Y->next;
+			}
+		}
+		//Hai binh giong nhau
+		return 1;
+	}
+}
+//13. Copy danh sach lien ket khac
+node * copyOtherLinkedList(node *root, node *other){
+	//Cho nut T tro den other
+	node *T = other;
+	//Lam rong danh sach root
+	root = MakeNodeNull();
+	//Lap de sau chep
+	while(T != NULL){
+		root = pushTail(root,T->data);
+		T = T->next;
+	}
+	return root;
+}
 //In danh sach lien ket
 void print(node *X){
 	node *i;
+	int dem = 1;
 	printf("\nDanh sach binh nuoc:");
 	for(i=X;i!=NULL;i=i->next){
+		printf("\n  Binh nuoc [%d]:",dem);
 		HienThiBinhNuoc(i->data);
-		printf("\n\t------------------");
+		dem++;
 	}
 }
-int main(){
-	int n,i,mucnuoc;
-	printf("Nhap so luong phan tu: "); scanf("%d",&n);
-	node *X;
-	X=MakeNodeNull();
-	binhNuoc gt;
-	for(i=0;i<n;i++){
-		//Tao binh nuoc rong
-		makeNull_bottle(&gt);
-		//Nhap muc nuoc
-		printf("\nNhap muc nuoc: "); scanf("%d",&mucnuoc);
-		EnterValueForBottle(&gt,mucnuoc);
-		//Them vao danh sach
-		X = pushTail(X,gt);
+//Doc danh sach cac binh nuoc tu FILE
+node *ReadListOfBottlesFromFile(char *S){
+	//Tao mot nut
+	node *temp;
+	temp = MakeNodeNull();
+	//Binh nuoc
+	binhNuoc BN;
+	//Cac bien
+	int soLuongChai,
+		mucNuoc,
+		i,j,
+		giaTri;
+	//Doc du lieu
+	FILE *F = fopen(S,"r");
+	//doc so luong binh nuoc
+	fscanf(F,"%d",&soLuongChai);
+		printf("\nSo Luong chai lo: %d",soLuongChai);
+	//Vong lap doc tung chai nuoc
+	for(i=1;i<=soLuongChai;i++){
+		//Lam rong binh nuoc
+		makeNull_bottle(&BN);
+		//Doc muc nuoc ma binh co the chua
+		fscanf(F,"%d",&mucNuoc);
+			printf("\n-------So muc nuoc trong chai[%d]: %d\n",i,mucNuoc);
+		//Vong doc tung du lieu vao trong chai nuoc
+		for(j=1;j<=mucNuoc;j++){
+			fscanf(F,"%d",&giaTri);
+				printf("%d",giaTri);
+			Add_AWaterLevel(&BN,giaTri);
+		}
+		//Them vao cuoi danh sach
+		temp = pushTail(temp,BN);
 	}
+	fclose(F);
+	return temp;
+}
+int main(){
+	node *X = ReadListOfBottlesFromFile("DS_BinhNuoc.txt");
+	node *Y = copyOtherLinkedList(Y,X);
+	printf("\n_______________Danh sach 1");
 	print(X);
-	printf("\nKich co cua danh sach: %d",size(X));
-	printf("\nTrong danh sach co binh rong ko: %d",checkEmptyBottleInLinkedList(X));
-	printf("\nVi tri binh rong trong danh sach: %d",size(X));
+	printf("\n______________Danh sach 2");
+	print(Y);
+	printf("\nHai danh sach giong nhau: %d",CompareTwoLinkedList(X,Y));
 }
