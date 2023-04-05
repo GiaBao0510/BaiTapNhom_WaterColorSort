@@ -180,6 +180,16 @@ node * copyOtherLinkedList(node *root, node *other){
 	}
 	return root;
 }
+//14.Kiem tra tat ca cac binh nuoc trong danh sach co dung mau chua(Trang thai goal cua danh sach binh nuoc)
+//int CheckTheTargetStateOfTheLinkedList(node *LL){
+//	//Cho Q tro toi LL
+//	node *Q = LL;
+//	//Lap de kiem tra tung binh nuoc co trong danh sach
+//	for(Q;Q!=NULL;Q=Q->next){
+//		if
+//	}
+//	return 1; //La trang thai dich
+//}
 //In danh sach lien ket
 void print(node *X){
 	node *i;
@@ -228,11 +238,12 @@ node *ReadListOfBottlesFromFile(char *S){
 	return temp;
 }
 int main(){
-	node *X = ReadListOfBottlesFromFile("DS_BinhNuoc.txt");
-	node *Y = copyOtherLinkedList(Y,X);
-	printf("\n_______________Danh sach 1");
-	print(X);
-	printf("\n______________Danh sach 2");
-	print(Y);
-	printf("\nHai danh sach giong nhau: %d",CompareTwoLinkedList(X,Y));
+//	node *X = ReadListOfBottlesFromFile("DS_BinhNuoc.txt");
+//	node *Y = copyOtherLinkedList(Y,X);
+//	printf("\n_______________Danh sach 1");
+//	print(X);
+//	printf("\n______________Danh sach 2");
+//	print(Y);
+//	printf("\nHai danh sach giong nhau: %d",CompareTwoLinkedList(X,Y));
+
 }
