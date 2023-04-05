@@ -224,16 +224,103 @@ node * XoaPhanCuoiCungTrongDanhSachLienKet(node *head){
 	}
 }
 //17.Xoa binh rong trong danh sach
-node * XoaBinhNuocRongTrongDanhSachLienKet()
-//Xoa o vi tri bat ky
-//Do nuoc trong binh nay sang tat cac binh khac trong danh sach lien ke
+node * XoaBinhNuocRongTrongDanhSachLienKet(node *head){
+	//Neu danh sach rong khong the xoa
+	if(Empty(head)){
+		printf("\n----Danh sach rong khong the xoa----\n");
+		return head;
+	}else{
+		//1. Cho Q tro vao head
+		node *Q = head;
+		node *temp = MakeNodeNull(); 
+		//2.Lap de tim binh rong
+		while(Q!=NULL){
+			//Neu tim thay binh rong thi cho Q tro den next
+			if(empty_bottle(Q->data)){
+				Q = Q->next;
+			}else{//Nguoc lai thi ta them vao temp
+				temp = pushTail(temp,Q->data);
+				Q = Q->next;
+			}
+		}
+		return temp;
+	}
+}
+//18.Tra ve gia tri cua phan tu trong danh sach tai vi tri bat ky
+binhNuoc ReturnThePositionOfTheBottle(node *X, int vitri){
+	//Neu vi tri khong hop le thi tra ve binh nuoc rong
+	if(vitri > size(X) || vitri < 0){
+		binhNuoc BN;
+		makeNull_bottle(&BN);
+		printf("\n\tVi tri khong hop le.\n");
+		return BN;
+	}else{
+		int dem = 0;
+		//Cho Q tro vao X
+		node *Q = X;
+		while(Q != NULL){
+			//Neu tim thay vi tri thi tra ve binh nuoc
+			if(dem == vitri){
+				return Q->data;
+			}else{//Nguoc lai thi tiep tuc tim
+				dem++;
+				Q = Q->next;
+			}
+		}
+		printf("\nDem: %d",dem);
+	}
+}
+//19.Do binh nuoc o vi tri bat ky sang tat ca binh nuoc khac trong danh sach (Ngoai tru no)
+node * DoBinhNuocO_viTriBatKySangTatCaBinhNuocKhac(node * DS, int vitri){
+	//Neu vi tri cho vao ma lon hon so luong binh nuoc thi khong thuc hien
+	if(vitri > size(DS) || vitri < 0){
+		return DS;
+	}else{//Nguoc lai ta thuc hien thao tac khac
+		//1. Tra ve binh nuoc tai vi tri can do sang cac binh khac
+		binhNuoc CanDo = ReturnThePositionOfTheBottle(DS,vitri);
+		printf("\nKich co binh nuoc: %d",size(DS));
+		printf("\nBinh Can xet:");
+		HienThiBinhNuoc(CanDo);
+		//2.Tao bien dem de neu tranh bi trung
+		int dem = 0,
+			thanhcong = 0;		//Bien nay dung de chi dung cho viec do 1 lan thoi.
+		//2. Cho Q tro de DS
+		node *Q = DS;
+		//3. Tao nut de luu tru gia tri sau khi do
+		node *temp = MakeNodeNull();
+		//4.Lap de do binh nuoc
+		while(Q!=NULL){
+			//Neu khong trung vi tri binh can dung de do thi thuc hien viec do
+			if(dem != vitri && thanhcong == 0){
+				if(doBinhASangBinhB(&CanDo,&Q->data) == 1){
+						printf("\n----------------Da do sang thanh cong:");
+						//HienThiBinhNuoc(Q->data);
+					temp = pushTail(temp,Q->data);
+					thanhcong = 1; //Vay se khong thuc hien them viec do nua
+				}else{
+						printf("\nThuc hien do khong thang cong");
+						//HienThiBinhNuoc(Q->data);
+					temp = pushTail(temp,Q->data);
+				}
+			}else{//Vi tri trung nhau thi van luu binh thuong
+					printf("\nVi tri bi trung voi vi tri can do");
+					//HienThiBinhNuoc(CanDo);
+				temp = temp = pushTail(temp,CanDo);
+			}
+			dem++;
+			Q = Q->next;
+		}
+		//Tra ve ket qua
+		return temp;
+	}
+}
 //In danh sach lien ket
 void print(node *X){
 	node *i;
-	int dem = 1;
+	int dem = 0;
 	printf("\nDanh sach binh nuoc:");
 	for(i=X;i!=NULL;i=i->next){
-		printf("\n  Binh nuoc [%d]:",dem);
+		printf("\n  So thu tu [%d]:",dem);
 		HienThiBinhNuoc(i->data);
 		dem++;
 	}
@@ -276,15 +363,16 @@ node *ReadListOfBottlesFromFile(char *S){
 	return temp;
 }
 int main(){
-	node *X = ReadListOfBottlesFromFile("DS_BinhNuoc.txt");
+	node *X = ReadListOfBottlesFromFile("DS_BinhNuoc2.txt");
 	node *Y = copyOtherLinkedList(Y,X);
 	printf("\n_______________Danh sach 1");
 	print(X);
-	printf("\n______________Danh sach 2");
-	print(Y);
-	printf("\nHai danh sach giong nhau: %d",CompareTwoLinkedList(X,Y));
-	printf("\nCac binh nuoc trong danh sach 1 deu co mau trung nhau: %d",CheckTheTargetStateOfTheLinkedList(X));
-	printf("\nSau khi xoa phan tu dau trong danh sach lien ket:");
-	X = XoaPhanCuoiCungTrongDanhSachLienKet(X);
+//	printf("\nHai danh sach giong nhau: %d",CompareTwoLinkedList(X,Y));
+//	printf("\nCac binh nuoc trong danh sach 1 deu co mau trung nhau: %d",CheckTheTargetStateOfTheLinkedList(X));
+//	printf("\nSau khi xoa phan tu dau trong danh sach lien ket:");
+//	X = XoaBinhNuocRongTrongDanhSachLienKet(X);
+//	print(X);
+	printf("\nSau khi thuc hien viec do nuoc o binh thu 1:");
+	X = DoBinhNuocO_viTriBatKySangTatCaBinhNuocKhac(X,1);
 	print(X);
 }
