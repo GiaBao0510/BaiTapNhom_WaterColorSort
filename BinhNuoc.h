@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #define maxKichCoBinh 6
 #define maxSoLuongBinh 1000
-#define empty 0
+#define EMPTY 0
 	/*Muc nuoc toi da cua moi binh deu la 5*/
 //Bien mo ta mau
 const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
@@ -157,3 +157,11 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 			return 1;//Trang thai cuoi cua binh nuoc
 		}
 	} 
+	//14. Ham kiem tra truoc ki do binh X sang binh Y
+	int KiemTraDieuKienTruocKhiDoNuocTuBinhNaySangBinhKhac(binhNuoc X,binhNuoc Y){
+		//Neu binh X khac rong va binh Y Chua day va hai muc nuoc dau cua hai binh deu giong nhau thi OK
+		if(!empty_bottle(X) && !full_bottle(Y) && MucNuocDau(X) == MucNuocDau(Y)){
+			return 1;
+		}
+		return 0;
+	}
