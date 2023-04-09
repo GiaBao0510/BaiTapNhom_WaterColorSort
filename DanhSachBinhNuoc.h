@@ -251,7 +251,7 @@ binhNuoc ReturnThePositionOfTheBottle(node *X, int vitri){
 	//Neu vi tri khong hop le thi tra ve binh nuoc rong
 	if(vitri > size(X) || vitri < 0){
 		binhNuoc BN;
-		makeNull_bottle(&BN);
+		makeNull_Bottle(&BN);
 		printf("\n\tVi tri khong hop le.\n");
 		return BN;
 	}else{
@@ -271,7 +271,7 @@ binhNuoc ReturnThePositionOfTheBottle(node *X, int vitri){
 	}
 }
 //19.Do binh nuoc o vi tri bat ky sang tat ca binh nuoc khac trong danh sach (Ngoai tru no)
-node * DoBinhNuocO_viTriBatKySangTatCaBinhNuocKhac(node * DS, int vtBinh1, int vtBinh2){
+node * DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(node * DS, int vtBinh1, int vtBinh2){
 	//Neu vi tri binh 1 va vi tri binh 2 ma lon hon kich co cua danh sah hoac la so am thi ko thuc hien hoac vi tri binh 1 va binh 2 giong nhau thi cung khong thuc hien
 	if(vtBinh1 > size(DS) || vtBinh1 < 0 || vtBinh2 > size(DS) || vtBinh2 < 0 || vtBinh1 == vtBinh2){
 		//	printf("\nThuc hien that bai.");
@@ -284,8 +284,8 @@ node * DoBinhNuocO_viTriBatKySangTatCaBinhNuocKhac(node * DS, int vtBinh1, int v
 		node *temp = MakeNodeNull();
 		//Cho 2 binh nuoc de bieu dien
 		binhNuoc B1, B2;
-		makeNull_bottle(&B1);
-		makeNull_bottle(&B2);
+		makeNull_Bottle(&B1);
+		makeNull_Bottle(&B2);
 		int dem = 0;
 		//Lap de tim va luu gia tri tai vi tri binh 1
 		while(Q1 != NULL){
@@ -471,7 +471,7 @@ node *ReadListOfBottlesFromFile(char *S){
 	//Vong lap doc tung chai nuoc
 	for(i=1;i<=soLuongChai;i++){
 		//Lam rong binh nuoc
-		makeNull_bottle(&BN);
+		makeNull_Bottle(&BN);
 		//Doc muc nuoc ma binh co the chua
 		fscanf(F,"%d",&mucNuoc);
 		if(mucNuoc > 5){

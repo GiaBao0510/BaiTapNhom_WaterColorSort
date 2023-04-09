@@ -12,7 +12,7 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 		int top;					//Muc nuoc dau tien	
 	}binhNuoc;
 	//1.Khoi tao binh nuoc rong
-	void makeNull_bottle(binhNuoc *B){
+	void makeNull_Bottle(binhNuoc *B){
 		B->top = 0;	//Nghia la muc nuoc cua no la 0
 	}
 	//2.Kiem tra binh nuoc rong
@@ -35,7 +35,7 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 			printf("\nMuc nuoc khong hop le");
 		}else{
 			int i,gtri;
-			makeNull_bottle(B); //lam rong binh nuoc cai da
+			makeNull_Bottle(B); //lam rong binh nuoc cai da
 			for(i=0;i<mucnuoc;i++){
 				printf("Nhap muc mau nuoc[%d]: ",i); scanf("%d",&gtri);
 				Add_AWaterLevel(B,gtri);
@@ -62,14 +62,14 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 	void copyBottle(binhNuoc *Result, binhNuoc current){
 		//Vi la ngn xep, nen tui su dung tan 2 binh nuoc. De dung trong viec sau chep binh nuoc khac
 		binhNuoc temp;	//Binh nuoc nay luu truu gia tri cua binh current. Nhung gia tri khi them binh nuoc nay gia tri cua no bi nguoc
-		makeNull_bottle(&temp);
+		makeNull_Bottle(&temp);
 		while(!empty_bottle(current)){
 			Add_AWaterLevel(&temp,MucNuocDau(current));
 			delete_AWaterLevel(&current);
 		}
 				//HienThiBinhNuoc(temp);
 		//Sau do, tui se luu gia tri cua binh nuoc temp, nhug gia tri nay trung voi binh current
-		makeNull_bottle(Result);	//Lam rong binh nhan thi
+		makeNull_Bottle(Result);	//Lam rong binh nhan thi
 		while(!empty_bottle(temp)){
 			Add_AWaterLevel(Result,MucNuocDau(temp));
 			delete_AWaterLevel(&temp);
@@ -129,7 +129,7 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 			printf("\nKich co binh nuoc vuot qua muc qui dinh");
 			return;	
 		}
-		makeNull_bottle(B);
+		makeNull_Bottle(B);
 		int i,value;
 		for(i=0;i<mucnuoc;i++){
 			//Doc gia tri: Ma doc gia tri tu duoi len tren
