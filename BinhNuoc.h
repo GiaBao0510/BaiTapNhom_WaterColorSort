@@ -52,7 +52,6 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 	}
 	//8.Hien thi trang thai binh nuoc
 	void HienThiBinhNuoc(binhNuoc B){
-		printf("\nBinh nuoc:");
 		while(!empty_bottle(B)){
 			printf("\n|\t%s\t|",mau[MucNuocDau(B)]);
 			delete_AWaterLevel(&B);

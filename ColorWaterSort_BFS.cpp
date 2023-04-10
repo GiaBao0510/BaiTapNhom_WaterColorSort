@@ -35,6 +35,13 @@ using namespace std;
 		}
 		return diem;
 	}
+	//4. Hien thi Diem
+	void PrintPoin(point *X){
+		printf("\nDiem:");
+		print(X->danhSach);
+		printf("\nBinh cho: %d",X->binhCho);
+		printf("\nBinh nhan: %d",X->binhNhan);
+	}
 //1.Kiem tra 1 danh sach trang thai co ton tai trong hang doi khong
 int IsTheListOfBottleInTheQueue(queue<point*> HangDoi, node *DS){
 	while(!HangDoi.empty()){
@@ -49,59 +56,97 @@ int IsTheListOfBottleInTheQueue(queue<point*> HangDoi, node *DS){
 }
 const char *action[] = {"Trang thai dau","Do nuoc tu binh %d vao binh %d"};
 //2. 
-point * GT(node *DSBN){
-	//1. Cac bien
-	queue<point*> open,		//Luu tru danh sach chua duoc duyet 
-				closed;		//Luu tru danh sach da duoc duyet
-	point *root; //Diem goc
-	//2.Khoi tao diem root
-	root = makeNullPoint();
-	root = AssignValueInA_Point(DSBN);	//Gan du lieu danh sach binh nuoc cho diem root
-	//3. Day diem root dau tien vao hang doi open
+point * BFS(node *DSBN){
+	//Tao danh sach open, closed
+	queue<point*> open,closed;
+	//Tao diem root
+	point *root = (point*)malloc(sizeof(point));
+	root->danhSach= DSBN;
+	root->binhCho = root->binhNhan = -1;
+	root->next = NULL;
+	//Day root vao open
 	open.push(root);
-	//4.Lap voi dieu khien la hang doi khong rong
-	int lap = 0;
+	//Lap den khi open rong thi dung lai
+	int dem = 0;
 	while(!open.empty()){
-		//4.1 Lay diem dau ra khoi hang doi
+		//Lay diem dau ra khoi open va day diem dau nay vao closed
 		point *Fpoint = open.front();
-			printf("\n-------------------[%d]Xet danh sach binh nuoc nay:--------------------",lap);
-			print(Fpoint->danhSach);
-		//4.2 Day diem vua duoc lay vao hang doi closed
-		closed.push(Fpoint);
-		//4.3 Xoa diem o dau hang doi open
 		open.pop();
-		//4.4 Kiem tra co phai trang thai dich khong
+		closed.push(Fpoint);
+			printf("\n__________Xet [%d]:_________",dem);
+			print(Fpoint->danhSach);
+		//Kiem tra neu la trang thai dich thi dung lai
 		if(CheckTheTargetStateOfTheLinkedList(Fpoint->danhSach) == 1){
-				printf("\nTrang thai dich ket thuc.");
+				printf("\nDung lai(ZaQuaRuDo)");
+				print(Fpoint->danhSach);
 			return Fpoint;
 		}
-		//Tao bien
-		int kichCoBinh = size(Fpoint->danhSach),	//Lay kich co binh nuoc
-			i,j;
-		//4.4 Lap de do nuoc tu binh duoc chon sang cac binh khac
-		for(i=1;i<=kichCoBinh;i++){
-			//Tao 1 node Q tro den gia tri node cua Diem Fpoint
+		int i,j,
+			kichCo = size(DSBN);
+		//Lap                   
+		for(i=0;i<=kichCo;i++){
+			//Cho Q tro den danh sach binh nuoc cua Fpoint
 			node *Q = Fpoint->danhSach;
-			for(j=1;j<=kichCoBinh;j++){
-				//Tao mot nut luu ket qua sao khi thuc hien do nuoc tu binh nay sang binh khac
+			for(j=0;j<=kichCo;j++){
+				//Thuc hien do binh nuoc
 				node *temp = DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(Q,i,j);
-				//Kiem tra xem trang thai cua danh sach binh nuoc nay no da ton tai trong hang doi open hoac closed. Thi bo qua
-				if(CompareTwoLinkedList(temp,open.front()->danhSach) == 1 || CompareTwoLinkedList(temp,closed.front()->danhSach)){
+					printf("\n>>>>> Chuan bi xet Trang thai: <<<<<");
+					printf("\n//// Do nuoc tu binh %d sang binh %d /////",i,j);
+					print(temp);
+				//Neu trang thai nay co trong open va closed thi bo qua
+				if(IsTheListOfBottleInTheQueue(open,temp) == 1 || IsTheListOfBottleInTheQueue(closed,temp) == 1){
 					continue;
 				}
-				//Neu day la 1 trang thai moi thi cho no vao hang doi open
-				//Tao 1 diem moi
+					printf("\n#### Trang thai moi: ####");
+					print(temp);
+				//Nguoc lai thi ta day trang thai moi nay vao open
 				point *Spoint = (point*)malloc(sizeof(point));
 				Spoint->danhSach = temp;
 				Spoint->binhCho = i;
 				Spoint->binhNhan = j;
 				Spoint->next = Fpoint;
-				open.push(Spoint);
+				open.push(Spoint); 
 			}
-		}
-		lap++;
+		}                                                                                                                                                                                                                                                                                                                                 
+		dem++;
 	}
-	return NULL; //Khong tim thay ket qua
+	return NULL;
 }
-
-
+point * kiemTra(node *DSBN){
+	queue<point*> open;
+	point *root = (point*)malloc(sizeof(point));
+	root->danhSach = DSBN;
+	root->binhCho = -1;
+	root->binhNhan=-1;
+	root->next = NULL;
+	printf("\n---------------Hien thi danh sach binh nuoc cua diem root:");
+	//print(root->danhSach);
+	open.push(root);
+	print(open.front()->danhSach);
+//	printf("\nDo nuoc tu binh nay sng 1 binh khac: do dai cua danh sach la: %d",size(root->danhSach));
+//	int i,j;
+//	node *Q = root->danhSach;
+//	for(i=0;i<size(root->danhSach);i++){
+//		printf("\n ----BInh thu [%d]:---- ",i);
+//		for(j=0;j<size(root->danhSach);j++){
+//			printf("\nDo nuoc tu binh %d sang binh %d.",i,j);
+//			node *temp = DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(Q,i,j);
+//			point *Snode = (point*)malloc(sizeof(point));
+//			root->danhSach = temp;
+//			root->binhCho = i;
+//			root->binhNhan=j;
+//			root->next = NULL;
+//			open.push(Snode);
+//			print(temp);
+//		}
+//	}
+//	int dem = 0;
+//	printf("\nCac trang thai trong hang doi");
+//	while(!open.empty()){
+//		printf("\n____________________________Trang thai %d ___________________________",dem);
+//		PrintPoin(open.front());
+//		open.pop();
+//		dem++;
+//	}
+	return root;
+}
