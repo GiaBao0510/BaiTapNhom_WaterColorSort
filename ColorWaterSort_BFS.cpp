@@ -88,16 +88,19 @@ point * BFS(node *DSBN){
 			//Cho Q tro den danh sach binh nuoc cua Fpoint
 			node *Q = Fpoint->danhSach;
 			for(j=0;j<=kichCo;j++){
+				//Neu i == j thi bo qua
+				if(i==j){
+					continue;
+				}
 				//Thuc hien do binh nuoc
 				node *temp = DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(Q,i,j);
-					printf("\n>>>>> Chuan bi xet Trang thai: <<<<<");
 					printf("\n//// Do nuoc tu binh %d sang binh %d /////",i,j);
-					print(temp);
+					//print(temp);
 				//Neu trang thai nay co trong open va closed thi bo qua
 				if(IsTheListOfBottleInTheQueue(open,temp) == 1 || IsTheListOfBottleInTheQueue(closed,temp) == 1){
 					continue;
 				}
-					printf("\n#### Trang thai moi: ####");
+					printf("\n\t\t#### Trang thai moi: ####");
 					print(temp);
 				//Nguoc lai thi ta day trang thai moi nay vao open
 				point *Spoint = (point*)malloc(sizeof(point));

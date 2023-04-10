@@ -194,7 +194,7 @@ int CheckTheTargetStateOfTheLinkedList(node *LL){
 	//Lap kiem tra tat ca cac top cua cac binh phai == 5. Nguoc lai thi tra ve 0;
 	node *Z = LL;
 	int i, soLan = size(LL);
-	for(i=0;i<soLan-1;i++){
+	for(i=0;i<soLan;i++){
 		if(Z->data.top != 5){
 			return 0;
 		}
@@ -400,13 +400,14 @@ node * DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(node * DS, int vtBinh1, int vtB
 	}
 	//Tim mau sac co trong mang mau sac khong
 	int CheckTheListOfBottlesIsValid(node *X){
+		node *Q = X;
 		//1.Neu danh sach binh nuoc ma khong co 1 binnh rong thi tra ve 0
-		if(!checkEmptyBottleInLinkedList(X)){
+		if(!checkEmptyBottleInLinkedList(Q)){
 			printf("\nVi Danh sach khong co binh rong");
 			return 0;
 		}
 		//2. Neu danh sach binh nuoc la 1 danh sach rong thi tra ve 0
-		if(Empty(X)){
+		if(Empty(Q)){
 			printf("\nVi Danh sach rong");
 			return 0;
 		}
@@ -415,8 +416,6 @@ node * DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(node * DS, int vtBinh1, int vtB
 		DanhSachThongTinMauSac DS;
 		LamRongDanhSachThongTinMauSac(&DS);
 		//Doc mau sach trong binh
-		//Cho Q tro den X
-		node *Q = X;
 		//Lap danh sach cac binh
 		while(Q!=NULL){
 			//Lap cac mau ben trong binh
