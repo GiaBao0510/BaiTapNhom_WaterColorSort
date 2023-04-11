@@ -114,16 +114,11 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 			//2. Neu gia tri muc nuoc dau tien giua hai binh la giong nhau thi thuc hien viec do nuoc
 			if(MucNuocDau(*X) == MucNuocDau(*Y)){
 				int temp = MucNuocDau(*X); //Luu tru gia tri muc nuoc dau cua binh X. De so sanh voi phan tu dung sau no neu ma giong nhau thi thuc hien. Nguoc lai thi ngung
-				//Neu binh X co top la 1(tuc chi co 1 muc nuoc) thi lam rong binh X va them muc nuoc o binh X sang binh Y
-				if(KichCoBinhNuoc(*X) == 1){
-					Add_AWaterLevel(Y,temp);
-					makeNull_Bottle(X);
-					return 1;
-				}
 				//2.1 Neu binh X chua rong thi do
 				while(!empty_bottle(*X)){
 					//2.2 Neu moi gia tri muc nuoc trong binh X lay ra ma trong voi bien temp thi thuc hien va Neu binh Y chua day thi thuc hien 
 					if(MucNuocDau(*X) == temp && !full_bottle(*Y)){
+						//Neu binh X co top la 1(tuc chi co 1 muc nuoc) thi lam rong binh X va them muc nuoc o binh X sang binh Y
 						if(KichCoBinhNuoc(*X) == 1){
 							Add_AWaterLevel(Y,temp);
 							makeNull_Bottle(X);
@@ -133,7 +128,7 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 							delete_AWaterLevel(X);		//Binh X mat di mot muc nuoc
 						}
 					}else{	//Da thuc hien viec do thanh cong
-						//printf("\nThanh cong!");
+							//printf("\nThanh cong!");
 						return 1;
 					}
 				}
@@ -141,10 +136,11 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 			else if(empty_bottle(*Y)){
 				Add_AWaterLevel(Y,MucNuocDau(*X));	//Them muc nuoc dau vao binh Y
 				delete_AWaterLevel(X);				//Xoa muc nuoc dau o binh X
+					//printf("\nThanh cong!");
 				return 1;
 			}
 		}
-		//printf("\nThat bai!");
+			//printf("\nThat bai!");
 		return 0;//Khong thuc hien thanh cong
 	}
 	//12.Doc 1 binh nuoc tu file

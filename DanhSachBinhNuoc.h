@@ -182,24 +182,29 @@ node * copyOtherLinkedList(node *root, node *other){
 }
 //14.Kiem tra tat ca cac binh nuoc trong danh sach co dung mau chua(Trang thai goal cua danh sach binh nuoc)
 int CheckTheTargetStateOfTheLinkedList(node *LL){
-	//Cho Q tro toi LL
-	node *Q = LL;
+	//Cho tao nut Q sau chep LL
+	node *Q = copyOtherLinkedList(Q,LL);
 	//Lap de kiem tra tung binh nuoc co trong danh sach
 	for(Q;Q!=NULL;Q=Q->next){
-		//Neu ma cac binh nuoc trong danh sach khong co cac mau trung nhau thi tra ve 0
-		if(CheckTheTargetStatusOfTheBottle(Q->data) == 0){
+		//Neu binh rong thi bo qua
+		if(empty_bottle(Q->data)){
+			continue;
+		}
+		//Neu ma cac binh nuoc trong danh sach khong co cac mau trung nhau thi tra ve 0 hoac Neu dinh binh nuoc ma != 5 thi tra ve 0
+		if(CheckTheTargetStatusOfTheBottle(Q->data) == 0 || Q->data.top != 5){
 			return 0;
 		}
 	}
 	//Lap kiem tra tat ca cac top cua cac binh phai == 5. Nguoc lai thi tra ve 0;
-	node *Z = LL;
-	int i, soLan = size(LL);
-	for(i=0;i<soLan;i++){
-		if(Z->data.top != 5){
-			return 0;
-		}
-		Z = Z->next;
-	}
+//	node *Z = copyOtherLinkedList(Z,LL);
+//	while(Z!=NULL){
+//		//Neu gap binh rong thi bo qua
+//		
+//		//Neu dinh binh nuoc ma != 5 thi tra ve 0
+//		if(Z->data.top != 5){
+//			return 0;
+//		}
+//	}
 	return 1; //La trang thai dich
 }
 //15.Xoa dau phan tu dau trong danh sach lien ket
@@ -342,10 +347,10 @@ node * DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(node * DS, int vtBinh1, int vtB
 				dem++;
 				Q3 = Q3->next;
 			}
-				printf("\nThuc hien thanh cong.");
+				//printf("\nThuc hien thanh cong viec do binh nuoc tu %d -> %d.",vtBinh1,vtBinh2);
 			return temp;
 		}else{
-				printf("\nThuc hien that bai.");
+				//printf("\nThuc hien that bai.");
 			return DS; //that bai khong tuc hien thanh cong
 		}
 	}
@@ -400,7 +405,7 @@ node * DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(node * DS, int vtBinh1, int vtB
 	}
 	//Tim mau sac co trong mang mau sac khong
 	int CheckTheListOfBottlesIsValid(node *X){
-		node *Q = X;
+		node *Q = copyOtherLinkedList(Q,X);
 		//1.Neu danh sach binh nuoc ma khong co 1 binnh rong thi tra ve 0
 		if(!checkEmptyBottleInLinkedList(Q)){
 			printf("\nVi Danh sach khong co binh rong");
