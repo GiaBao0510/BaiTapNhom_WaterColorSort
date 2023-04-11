@@ -2,6 +2,7 @@
 #include<malloc.h>
 using namespace std;
 #include<queue>	//Su dung thu vien hang doi
+#include<stack>
 #include"DanhSachBinhNuoc.h"
 //Tao mot cau truc de luu truu duong di trong tro choi
 	struct DuongDi{
@@ -77,8 +78,8 @@ point * BFS(node *DSBN){
 			//print(Fpoint->danhSach);
 		//Kiem tra neu la trang thai dich thi dung lai
 		if(CheckTheTargetStateOfTheLinkedList(Fpoint->danhSach) == 1){
-				printf("\nDung lai(ZaQuaRuDo)");
-				print(Fpoint->danhSach);
+				//printf("\nDung lai(ZaQuaRuDo)");
+				//print(Fpoint->danhSach);
 			return Fpoint;
 		}
 		int i,j,
@@ -115,10 +116,22 @@ point * BFS(node *DSBN){
 	}
 	return NULL;
 }
-//Ket qua
-//void CachThucHien(point *S){
-//	while(S!=NULL){
-//		print(S->danhSach);
-//		printf("%s",);
-//	}
-//}
+void th(point *S){
+	stack<point*> NX;
+	while(S!=NULL){
+		NX.push(S);
+		S = S->next;
+	}
+	//Hien thi
+	int i=0;
+	while(!NX.empty()){
+		if(i == 0){
+			printf("\nTrang thai dau.");
+		}else{
+			printf("\nDo nuoc tu binh %d sang binh %d",NX.top()->binhCho,NX.top()->binhNhan);
+		}
+		print(NX.top()->danhSach);
+		i++;
+		NX.pop();
+	}
+}

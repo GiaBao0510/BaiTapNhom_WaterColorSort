@@ -195,16 +195,6 @@ int CheckTheTargetStateOfTheLinkedList(node *LL){
 			return 0;
 		}
 	}
-	//Lap kiem tra tat ca cac top cua cac binh phai == 5. Nguoc lai thi tra ve 0;
-//	node *Z = copyOtherLinkedList(Z,LL);
-//	while(Z!=NULL){
-//		//Neu gap binh rong thi bo qua
-//		
-//		//Neu dinh binh nuoc ma != 5 thi tra ve 0
-//		if(Z->data.top != 5){
-//			return 0;
-//		}
-//	}
 	return 1; //La trang thai dich
 }
 //15.Xoa dau phan tu dau trong danh sach lien ket
@@ -432,12 +422,6 @@ node * DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(node * DS, int vtBinh1, int vtB
 			}
 			Q = Q->next;
 		}
-//			printf("\nCo %d mau.",DS.doDai);
-//			int i;
-//			for(i=1;i<=DS.doDai;i++){
-//				printf("\n----------------");
-//				printf("\nMau %d xuat hien %d lan.",DS.data[i].mau,DS.data[i].sl);
-//			}
 		//3. Neu so luong mau xuat hien ma so hon so luong binh nuoc -1 thi tra ve 0
 		if(DS.doDai > size(X)){
 			printf("\nVi so luong mau sau: %d - so luong binh nuoc: %d", DS.doDai,size(X));
