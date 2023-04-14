@@ -4,6 +4,7 @@ using namespace std;
 #include<queue>	//Su dung thu vien hang doi
 #include<stack>
 #include"DanhSachBinhNuoc.h"
+#define COLOR_RESET    "\x1b[0m"
 //Tao mot cau truc de luu truu duong di trong tro choi
 	struct DuongDi{
 		node * danhSach;	//Danh sach binh nuoc
@@ -38,10 +39,10 @@ using namespace std;
 	}
 	//4. Hien thi Diem
 	void PrintPoin(point *X){
-		printf("\nDiem:");
+		printf(COLOR_RESET "\nDiem:");
 		print(X->danhSach);
-		printf("\nBinh cho: %d",X->binhCho);
-		printf("\nBinh nhan: %d",X->binhNhan);
+		printf(COLOR_RESET "\nBinh cho: %d",X->binhCho);
+		printf(COLOR_RESET "\nBinh nhan: %d",X->binhNhan);
 	}
 //1.Kiem tra 1 danh sach trang thai co ton tai trong hang doi khong
 int IsTheListOfBottleInTheQueue(queue<point*> HangDoi, node *DS){
@@ -55,7 +56,7 @@ int IsTheListOfBottleInTheQueue(queue<point*> HangDoi, node *DS){
 	}
 	return 0;//Nghia la khong ton tai danh sach binh nuoc trong hang doi
 }
-const char *action[] = {"Trang thai dau","Do nuoc tu binh %d vao binh %d"};
+const char *action[] = {COLOR_RESET "Trang thai dau",COLOR_RESET "Do nuoc tu binh %d vao binh %d"};
 //2. 
 point * BFS(node *DSBN){
 	//Tao danh sach open, closed
@@ -126,9 +127,9 @@ void th(point *S){
 	int i=0;
 	while(!NX.empty()){
 		if(i == 0){
-			printf("\nTrang thai dau.");
+			printf(COLOR_RESET "\nTrang thai dau.");
 		}else{
-			printf("\nDo nuoc tu binh %d sang binh %d",NX.top()->binhCho,NX.top()->binhNhan);
+			printf(COLOR_RESET "\nDo nuoc tu binh %d sang binh %d",NX.top()->binhCho,NX.top()->binhNhan);
 		}
 		print(NX.top()->danhSach);
 		i++;

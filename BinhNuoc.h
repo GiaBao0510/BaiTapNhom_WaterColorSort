@@ -3,9 +3,17 @@
 #define maxKichCoBinh 6
 #define maxSoLuongBinh 1000
 #define EMPTY 0
+#define COLOR_RED     "\x1b[31m"
+#define COLOR_GREEN   "\x1b[32m"
+#define COLOR_BLUE    "\x1b[34m"
+#define COLOR_BROWN    "\x1b[33m"
+#define COLOR_BLACK    "\x1b[30m"
+#define COLOR_WHITE    "\x1b[37m"
+#define COLOR_VIOLET   "\x1b[35m"
+#define COLOR_RESET    "\x1b[0m"
 	/*Muc nuoc toi da cua moi binh deu la 5*/
 //Bien mo ta mau
-const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
+const char *mau[] = {COLOR_RESET COLOR_BROWN"Brown",COLOR_RESET COLOR_RED"Red",COLOR_RESET COLOR_GREEN"Green",COLOR_RESET COLOR_BLUE"Blue",COLOR_RESET COLOR_BLACK "Black",COLOR_RESET COLOR_WHITE "White",COLOR_RESET COLOR_VIOLET"Violet"};
 //Cau truc binh nuoc. Moi binh co kich co khac nhau va gia tri muc nuoc cua moi binh la khac nhau
 	typedef struct{
 		int	data[maxKichCoBinh];	//Kich co hien tai cua mot binh
@@ -32,12 +40,12 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 	void EnterValueForBottle(binhNuoc *B,int mucnuoc){
 		//Kiem tra xem muc nuoc co hop le khong
 		if(mucnuoc > maxKichCoBinh-1){
-			printf("\nMuc nuoc khong hop le");
+			printf(COLOR_RESET "\nMuc nuoc khong hop le");
 		}else{
 			int i,gtri;
 			makeNull_Bottle(B); //lam rong binh nuoc cai da
 			for(i=0;i<mucnuoc;i++){
-				printf("Nhap muc mau nuoc[%d]: ",i); scanf("%d",&gtri);
+				printf(COLOR_RESET "Nhap muc mau nuoc[%d]: ",i); scanf("%d",&gtri);
 				Add_AWaterLevel(B,gtri);
 			}
 		}
@@ -67,7 +75,8 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 	//8.Hien thi trang thai binh nuoc
 	void HienThiBinhNuoc(binhNuoc B){
 		while(!empty_bottle(B)){
-			printf("\n|\t%s\t|",mau[MucNuocDau(B)]);
+			printf(COLOR_RESET"\n|\t%s",mau[MucNuocDau(B)]);
+            printf(	COLOR_RESET"\t|");
 			delete_AWaterLevel(&B);
 		}
 	}
@@ -152,7 +161,7 @@ const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 		fscanf(F,"%d",&mucnuoc);
 		//Kiem tra neu muc nuoc doc vao lon ho so voi quy dinh thi .Dung
 		if(mucnuoc > maxKichCoBinh-1){
-			printf("\nKich co binh nuoc vuot qua muc qui dinh.");
+			printf(COLOR_RESET "\nKich co binh nuoc vuot qua muc qui dinh.");
 			return;	
 		}
 		makeNull_Bottle(B);

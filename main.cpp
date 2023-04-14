@@ -6,13 +6,13 @@ int main(){
 	//Kiem tra neu danh sach binh nuoc hop le thi thuc hien giai thuat
 	
 	if(CheckTheListOfBottlesIsValid(DSBN)){
-			printf("\nDanh sach cua cac binh nuoc dau vao la hop le.");
-			printf("\n\t.... Dang Tai ....");
+			printf(COLOR_RESET "\nDanh sach cua cac binh nuoc dau vao la hop le.");
+			printf(COLOR_RESET "\n\t.... Dang Tai ....");
 			point *diem;
 			diem = BFS(DSBN);
 			//Ket qua
 			th(diem);
 	}else{
-		printf("\nDanh sach cua cac binh nuoc khong hop le.");
+		printf(COLOR_RESET "\nDanh sach cua cac binh nuoc khong hop le.");
 	}
 }
