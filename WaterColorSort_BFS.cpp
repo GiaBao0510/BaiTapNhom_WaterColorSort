@@ -56,12 +56,11 @@ int IsTheListOfBottleInTheQueue(queue<point*> HangDoi, node *DS){
 	}
 	return 0;//Nghia la khong ton tai danh sach binh nuoc trong hang doi
 }
-const char *action[] = {COLOR_RESET "Trang thai dau",COLOR_RESET "Do nuoc tu binh %d vao binh %d"};
 //2. 
 point * BFS(node *DSBN){
-	//Tao danh sach open, closed
+	//Tao hang doi open, closed
 	queue<point*> open,closed;
-	//Tao diem root
+	//Tao diem root va khoi tao diem root
 	point *root = (point*)malloc(sizeof(point));
 	root->danhSach= DSBN;
 	root->binhCho = root->binhNhan = -1;
@@ -87,7 +86,7 @@ point * BFS(node *DSBN){
 			kichCo = size(DSBN);
 		//Lap                   
 		for(i=0;i<=kichCo;i++){
-			//Cho Q tro den danh sach binh nuoc cua Fpoint
+			//Cho Q sao chep danh sach binh nuoc cua Fpoint
 			node *Q = copyOtherLinkedList(Q,Fpoint->danhSach);
 			for(j=0;j<=kichCo;j++){
 				//Neu i == j thi bo qua

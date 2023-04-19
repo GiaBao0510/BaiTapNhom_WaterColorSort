@@ -13,7 +13,7 @@
 #define COLOR_RESET    "\x1b[0m"
 	/*Muc nuoc toi da cua moi binh deu la 5*/
 //Bien mo ta mau
-const char *mau[] = {COLOR_RESET COLOR_BROWN"Brown",COLOR_RESET COLOR_RED"Red",COLOR_RESET COLOR_GREEN"Green",COLOR_RESET COLOR_BLUE"Blue",COLOR_RESET COLOR_BLACK "Black",COLOR_RESET COLOR_WHITE "White",COLOR_RESET COLOR_VIOLET"Violet"};
+const char *mau[] = {"Brown","Red","Green","Blue","Black","White","Violet"};
 //Cau truc binh nuoc. Moi binh co kich co khac nhau va gia tri muc nuoc cua moi binh la khac nhau
 	typedef struct{
 		int	data[maxKichCoBinh];	//Kich co hien tai cua mot binh
@@ -75,8 +75,8 @@ const char *mau[] = {COLOR_RESET COLOR_BROWN"Brown",COLOR_RESET COLOR_RED"Red",C
 	//8.Hien thi trang thai binh nuoc
 	void HienThiBinhNuoc(binhNuoc B){
 		while(!empty_bottle(B)){
-			printf(COLOR_RESET"\n|\t%s",mau[MucNuocDau(B)]);
-            printf(	COLOR_RESET"\t|");
+			printf("\n|\t%s",mau[MucNuocDau(B)]);
+            printf("\t|");
 			delete_AWaterLevel(&B);
 		}
 	}
@@ -125,7 +125,7 @@ const char *mau[] = {COLOR_RESET COLOR_BROWN"Brown",COLOR_RESET COLOR_RED"Red",C
 				int temp = MucNuocDau(*X); //Luu tru gia tri muc nuoc dau cua binh X. De so sanh voi phan tu dung sau no neu ma giong nhau thi thuc hien. Nguoc lai thi ngung
 				//2.1 Neu binh X chua rong thi do
 				while(!empty_bottle(*X)){
-					//2.2 Neu moi gia tri muc nuoc trong binh X lay ra ma trong voi bien temp thi thuc hien va Neu binh Y chua day thi thuc hien 
+					//2.2 Neu moi gia tri muc nuoc trong binh X lay ra ma trung voi bien temp thi thuc hien va Neu binh Y chua day thi thuc hien 
 					if(MucNuocDau(*X) == temp && !full_bottle(*Y)){
 						//Neu binh X co top la 1(tuc chi co 1 muc nuoc) thi lam rong binh X va them muc nuoc o binh X sang binh Y
 						if(KichCoBinhNuoc(*X) == 1){

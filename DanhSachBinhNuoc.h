@@ -14,7 +14,7 @@ node * MakeNodeNull(){
 int Empty(node *X){
 	return X== NULL;
 }
-//3.Gan gia tri cho mot nut
+//3.Gan binh nuoc cho mot nut
 node *AssignValue(binhNuoc data){
 	node *temp;
 	temp = (node*)malloc(sizeof(node));	//Cap phat bo nho
@@ -22,7 +22,7 @@ node *AssignValue(binhNuoc data){
 	temp->next = NULL;
 	return temp;
 }
-//4.Them vao gia tri dau danh sach
+//4.Them vao gia tri dau danh sach (### Khong co dung ###)
 node * pushHead(node *head,binhNuoc data){
 	node *temp;
 	temp = (node*)malloc(sizeof(node));//Cap phat bo nho
@@ -53,7 +53,7 @@ node * pushTail(node *head,binhNuoc data){
 	}
 	return head;
 }
-//6.Them binh nuoc vao vi tri bat ky trong danh sach
+//6.Them binh nuoc vao vi tri bat ky trong danh sach (### Khong co dung ###)
 node * AddToAnyPossitionInTheLinkedList(node *head,binhNuoc data,int possition){
 	if(possition == 0 || head == NULL){		//.Vi tri bat dau luon la 0 ,neu vi tri can them la 0 hoac head bang NULL thi dat head la temp
 		head = AssignValue(data);
@@ -107,7 +107,7 @@ int checkEmptyBottleInLinkedList(node *X){
 		return 0; //Khong tim thay binh rong
 	}
 }
-//9.Tim vi tri binh rong trong danh sach lien ket
+//9.Tim vi tri binh rong trong danh sach lien ket (### Khong co dung ###)
 int EmptyBottlePositionQuery(node *X){
 	//Neu danh sach rong thi tra ve -1
 	if(Empty(X)){
@@ -197,7 +197,7 @@ int CheckTheTargetStateOfTheLinkedList(node *LL){
 	}
 	return 1; //La trang thai dich
 }
-//15.Xoa dau phan tu dau trong danh sach lien ket
+//15.Xoa dau phan tu dau trong danh sach lien ket (### Khong co dung ###)
 node * XoaPhanTuDauTienTrongDanhSachLienKet(node *head){
 	//Neu danh sach rong thi tra ve 0
 	if(Empty(head)){
@@ -207,7 +207,7 @@ node * XoaPhanTuDauTienTrongDanhSachLienKet(node *head){
 	}
 	return head;
 }
-//16.Xoa binh nuoc cuoi danh sach
+//16.Xoa binh nuoc cuoi danh sach (### Khong co dung ###)
 node * XoaPhanCuoiCungTrongDanhSachLienKet(node *head){
 	//Neu danh sach rong hoac next cua head la rong thi head
 	if(Empty(head) || head->next == NULL){
@@ -227,7 +227,7 @@ node * XoaPhanCuoiCungTrongDanhSachLienKet(node *head){
 		return temp;
 	}
 }
-//17.Xoa binh rong trong danh sach
+//17.Xoa binh rong trong danh sach (### Khong co dung ###)
 node * XoaBinhNuocRongTrongDanhSachLienKet(node *head){
 	//Neu danh sach rong khong the xoa
 	if(Empty(head)){
@@ -250,7 +250,7 @@ node * XoaBinhNuocRongTrongDanhSachLienKet(node *head){
 		return temp;
 	}
 }
-//18.Tra ve gia tri cua phan tu trong danh sach tai vi tri bat ky
+//18.Tra ve gia tri cua phan tu trong danh sach tai vi tri bat ky (### Khong co dung ###)
 binhNuoc ReturnThePositionOfTheBottle(node *X, int vitri){
 	//Neu vi tri khong hop le thi tra ve binh nuoc rong
 	if(vitri > size(X) || vitri < 0){
@@ -383,7 +383,7 @@ node * DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(node * DS, int vtBinh1, int vtB
 	}
 	//2.Them 1 thong tin ve mac sac cho danh sach thong tin mau sac
 	void ThemThongTinMauSacVaoCuoi(DanhSachThongTinMauSac *DS,ColorInformation X){
-		//Neu mau nay duoc them vao danh sach ma ben trong danh sach nay da ton tai ma do thi tang so luong mau do
+		//Neu mau nay duoc them vao danh sach ma ben trong danh sach nay da ton tai mau do thi tang so luong mau do
 		if(TimMauSacTrungTrongDanhSach(*DS,X) != 0){
 			int vitri = TimMauSacTrungTrongDanhSach(*DS,X);
 			DS->data[vitri].sl++;
@@ -393,7 +393,7 @@ node * DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(node * DS, int vtBinh1, int vtB
 			DS->data[DS->doDai].sl = 1;
 		}
 	}
-	//Tim mau sac co trong mang mau sac khong
+	//Ham kiem tra danh sach co hop le khong
 	int CheckTheListOfBottlesIsValid(node *X){
 		node *Q = copyOtherLinkedList(Q,X);
 		//1.Neu danh sach binh nuoc ma khong co 1 binnh rong thi tra ve 0
@@ -424,21 +424,21 @@ node * DoBinhNuocO_viTriBatKySangMotBinhNuocKhac(node * DS, int vtBinh1, int vtB
 		}
 		//3. Neu so luong mau xuat hien ma so hon so luong binh nuoc -1 thi tra ve 0
 		if(DS.doDai > size(X)){
-			printf(COLOR_RESET "\nVi so luong mau sau: %d - so luong binh nuoc: %d", DS.doDai,size(X));
+			printf(COLOR_RESET "\nVi so luong mau sac: %d Lon hop so luong binh nuoc: %d", DS.doDai,size(X));
 			return 0;
 		}
-		//4.Kiem tra tat cac ca so lan xuat hien mau nuoc phai bang 5
+		//4.Kiem tra tat ca cac so lan xuat hien mau nuoc phai bang 5
 		int i;
 		for(i=1;i<DS.doDai;i++){
 			//Neu so lan xuat hien cua 1 mau nao do ma != 5 thi tra ve 0
-			if(DS.data[i].sl != 5){
+			if(DS.data[i].sl != 5 || DS.data[i].sl % 5 != 0){
 				printf(COLOR_RESET "\nVi so mau: %d - so lan xuat hien: %d",DS.data[i].mau,DS.data[i].sl);
 				return 0;
 			}
 		}
 		return 1;//Hop le
 	}
-//In danh sach lien ket
+//21.In danh sach lien ket
 void print(node *X){
 	node *i;
 	int dem = 0;
@@ -449,7 +449,7 @@ void print(node *X){
 		dem++;
 	}
 }
-//Doc danh sach cac binh nuoc tu FILE
+//22.Doc danh sach cac binh nuoc tu FILE
 node *ReadListOfBottlesFromFile(char *S){
 	//Tao mot nut
 	node *temp;
